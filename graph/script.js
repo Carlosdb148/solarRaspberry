@@ -28,15 +28,15 @@
       
   })
   const drawData =  async () => {
-      let data = await fetch("http://localhost:8000/peticion")
+       await fetch("http://localhost:8000/peticion")
                       .then(res => res.json() )
                       .then(data => {
                           divData.innerHTML = "";
                           divLogs.innerHTML = "";
-                          var lab =[]
-                          var dat = []
+                          var lab = [];
+                          var dat = [];
                           for(const prop in data) {
-                            if(prop == 'logs'){
+                            if(prop == 'logs') {
                               var div = document.createElement('div');
                               div.innerHTML+="Eje X: " + data.logs[0].ejex +'<br/>';
                               div.innerHTML+="Eje Y: " + data.logs[0].ejey +'<br/>' ;
@@ -46,25 +46,19 @@
                               div.innerHTML+="LDR3: " + data.logs[0].ldr3 +'<br/>' ;
                               div.innerHTML+="LDR4: " + data.logs[0].ldr4 +'<br/>' ;                                                                                                                                                                                                          
                               divLogs.appendChild(div);
-                              
                             }
-                            if(prop != 'imagenSol'){
-                                lab.push(prop)
-                                dat.push(data[prop])
+                            if(prop != 'imagenSol') {
+                                lab.push(prop);
+                                dat.push(data[prop]);
                             }
-                              
-                              myChart.config.data.labels =lab;
-                              myChart.config.data.datasets[0].data = dat;  
-                              myChart.reset();
-                              myChart.update();
-                            
-                              var div = document.createElement('div');
-                              div.innerHTML = `${prop}: ${data[prop]}`;
-                              divData.appendChild(div);
-                              
+                            var div = document.createElement('div');
+                            div.innerHTML = `${prop}: ${data[prop]}`;
+                            divData.appendChild(div);   
                           }
-                          document.getElementById('grafica').innerHTML="aaaa";
-                          
+                          myChart.config.data.labels = lab;
+                          myChart.config.data.datasets[0].data = dat;  
+                          myChart.reset();
+                          myChart.update(); 
                       })
                       .catch(e => console.log(e) )
   }
