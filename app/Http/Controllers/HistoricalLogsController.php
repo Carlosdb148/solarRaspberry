@@ -6,11 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 class HistoricalLogsController extends Controller
 {
+    public function __construct()
+    {
+        //$this->middleware('auth');
+        //$this->middleware('jwt')->only(['peticion', 'getLogs']);
+    }
     //
-     public function consulta()
+     public function admin()
     {   $data = null;
         $logs = array();
         
@@ -24,12 +31,20 @@ class HistoricalLogsController extends Controller
         
         
     }
-    public function peticion(){
-        $data = Http::get("http://192.168.108.137:3000/execute");
+    public function peticion(Request $request){
+        
+        $data = Http::withHeaders(['Authentication' => $request->header('Authentication')])
+        ->post("http://192.168.108.137:3000/execute", ['command' => $request->command]);
+        
+        
+        return response()->json([   'command'     => $data->body(), 'request' => $request], 200);
+        
+        
+    }
+    public function getLogs(){
         $logs = DB::select("select * from historical_logs");
         
-        return response()->json([   'data'     => $data->body(),
-        'logs' =>$logs], 200);
+        return response()->json([   'logs'     => $logs], 200);
         
         
     }

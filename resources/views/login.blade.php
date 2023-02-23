@@ -17,10 +17,11 @@
     <div class="login-container">
       <h1>Solar Panel</h1>
       <div class="login">
+        <form action="{{url('./retrieveToken')}}">
         <div class="fields-container">
           <div class="form-group">
             <label for="inUser">User</label>
-            <input type="text" class="form-control" id="inUser" />
+            <input name="name" type="text" class="form-control" id="inUser" />
           </div>
           <div class="form-group form-group-pass">
             <label for="inPass">Password</label>
@@ -30,6 +31,7 @@
             Login
           </button>
         </div>
+        </form>
       </div>
     </div>
     <script

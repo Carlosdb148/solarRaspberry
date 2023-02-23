@@ -49,9 +49,7 @@
               
               
             </div>
-            <form action="{{url('/peticion')}}">
-              <button> Ask and ye shall recieve </button>
-            </form>
+            
           </div>
         </div>
         <div class="col-4 col-2">
@@ -64,7 +62,7 @@
             
 
             
-            <button id="getData" style="width: 100px; height: 20px;"> Get Data</button>
+            <button class="list-group-item list-group-item-action" id="getData" style="width: 100px; height: 20px;"> Get Data</button>
           </div>
         </div>
       </div>
@@ -96,6 +94,12 @@
       </div>
       <div class="offcanvas-body">
         <div class="list-group">
+          <form  method="POST" action="{{url('./peticion')}}">
+            @csrf
+            <label>Command test</label>
+            <input name="command" type="text"/>
+            <input type="submit">
+          </form>
           <button type="button" class="list-group-item list-group-item-action">
             Axes Movement
           </button>

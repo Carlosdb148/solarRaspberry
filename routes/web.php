@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('consulta', [App\Http\Controllers\HistoricalLogsController::class, 'consulta']);
-Route::get('peticion', [App\Http\Controllers\HistoricalLogsController::class, 'peticion']);
+
+Route::get('admin', [App\Http\Controllers\HistoricalLogsController::class, 'admin']);
+Route::get('getLogs', [App\Http\Controllers\HistoricalLogsController::class, 'getLogs']);
+Route::post('peticion', [App\Http\Controllers\HistoricalLogsController::class, 'peticion']);
+Route::post('retrieveToken', [App\Http\Controllers\HomeController::class, 'retrieveToken']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('user');

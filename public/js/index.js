@@ -25,7 +25,7 @@ btn.addEventListener('click', () => {
     drawData();
 })
 const drawData =  async () => {
-    let data = await fetch("http://localhost:8000/peticion")
+    let data = await fetch("http://localhost:8000/getLogs")
                     .then(res => res.json() )
                     .then(data => {
                         divData.innerHTML = "";
@@ -33,19 +33,24 @@ const drawData =  async () => {
                         for(const prop in data) {
                           if(prop == 'logs'){
                             var div = document.createElement('div');
-                            div.innerHTML+="Eje X: " + data.logs[0].ejex +'<br/>';
-                            div.innerHTML+="Eje Y: " + data.logs[0].ejey +'<br/>' ;
-                            div.innerHTML+="Bateria: " + data.logs[0].bateria+'%' +'<br/>' ;
-                            div.innerHTML+="LDR1: " + data.logs[0].ldr1 +'<br/>' ;
-                            div.innerHTML+="LDR2: " + data.logs[0].ldr2 +'<br/>' ;
-                            div.innerHTML+="LDR3: " + data.logs[0].ldr3 +'<br/>' ;
-                            div.innerHTML+="LDR4: " + data.logs[0].ldr4 +'<br/>' ;                                                                                                                                                                                                          
+                            data.logs.forEach(element => {
+                              div.innerHTML+="Data for: " + element.created_at +'<br/>';
+                              div.innerHTML+="Eje X: " + element.ejex +'<br/>';
+                            div.innerHTML+="Eje Y: " + element.ejey +'<br/>' ;
+                            div.innerHTML+="Bateria: " + element.bateria+'%' +'<br/>' ;
+                            div.innerHTML+="LDR1: " + element.ldr1 +'<br/>' ;
+                            div.innerHTML+="LDR2: " + element.ldr2 +'<br/>' ;
+                            div.innerHTML+="LDR3: " + element.ldr3 +'<br/>' ;
+                            div.innerHTML+="LDR4: " + element.ldr4 +'<br/>' ;     
+                            });
+                                                                                                                                                                                                                                 
 
                             divLogs.appendChild(div);
-                          }
+                          }else{
                             var div = document.createElement('div');
                             div.innerHTML = `${prop}: ${data[prop]}`;
                             divData.appendChild(div);
+                          }
                         }
                     })
                     .catch(e => console.log(e) )
