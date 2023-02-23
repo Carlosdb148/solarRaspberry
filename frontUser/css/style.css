@@ -8,6 +8,9 @@
     height: 100vh;
     padding: 0;
 }
+.orange{
+    color: #FF931E;
+}
 .info-general{
     width: 100%;
     height: 400px;
@@ -15,7 +18,16 @@
 
 }
 .btn-getInfo{
-    width: 100px;
+    width: 140px;
+    border:1px solid #FF931E;
+    background-color: white;
+    border-radius: 2px;
+    padding: 5px 2px;
+}
+.btn-getInfo:hover{
+    background-color: #FF931E;
+    color: black;
+    transition: all 1s;
 }
 .graph{
     height: 600px;
@@ -24,7 +36,7 @@
 .footer{
     background-color: black;
     width: 100%;
-    height: 50vh;
+    height: 57vh;
     display: flex;
     justify-content: center;
     align-content: end;
@@ -32,11 +44,54 @@
 .middle{
     height: 60%;
 }
-.cont{
-    width: 100%;
-    box-sizing: border-box;
-}
+
 .row{
     padding: 0;
     margin:0;
+}
+.logo{
+    width: 150px;
+    background-image: url(./../img/logo.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 80px;
+}
+.info{
+    font-size: 1.2rem;
+    color:rgb(117, 117, 117); 
+    padding-right: 0;
+    margin-top: 0;
+}
+.general,.record,.graphic {
+    position: relative;
+    padding-right: 0;
+    margin-top: 50px;
+    margin-bottom: 0px;
+}
+.general::before{
+    content: "";
+    width: 60px;
+    height: 2px;
+    background-color: #FF931E;
+    position: absolute;
+    top:-10px;
+}
+.record::before{
+    content: "";
+    width: 60px;
+    height: 2px;
+    background-color: #FF931E;
+    position: absolute;
+    right: 0px;
+    top:-10px;
+}
+.graphic::before{
+    content: "";
+    width: 60px;
+    height: 2px;
+    background-color: #FF931E;
+    position: absolute;
+    left: calc( 50% - 20px );
+    top:-10px;
 }
