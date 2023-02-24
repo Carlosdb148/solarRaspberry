@@ -21,8 +21,12 @@ services:
       - './my-project:/app'
     depends_on:
       - mariadb
-  nodeserver:
-    image: cucaracha
-    build: ./
+  nodeserver:    
+    build: ./nodeServer
     ports:
       - '3000:3000'
+  redis:
+    image: redis
+    ports: 
+      - '1000:6379'
+    
