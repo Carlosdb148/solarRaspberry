@@ -79,7 +79,7 @@
     <img class="img-fluid d-block mx-auto" src=" data:image/jpeg;base64,{{ $data }}" alt="..." />
     @endif
             </div>
-            <button class="btn-getInfo mt-4 info" id="getPic">GET INFO</button>
+            <a href="{{url('http://localhost:8000/getPic')}}" class="btn-getInfo mt-4 info" id="getPic">GET INFO</a>
           </div>
         </div>
       </div>
