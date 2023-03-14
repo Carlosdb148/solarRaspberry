@@ -41,7 +41,7 @@
           <div class="card">
             <div class="card-header">Device Status</div>            
             <div  id="drawData" class="card-body"> 
-              {{ $token }}
+              
               
             </div>
             
