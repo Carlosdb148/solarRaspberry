@@ -1,44 +1,18 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const { exec } = require("child_process");
-const bodyparser = require('body-parser');
 require('dotenv').config();
 const app = express();
-// const Queue = require('bull');
-const imageToBase64 = require('image-to-base64');
 const port = 3000;
 
-var commandRes;
-
-app.use(bodyparser.json());
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
-
-// const queue = new Queue('command queue', {
-//     redis: { host: "127.0.0.1", port: 1000 }
-//   });
-
-//   queue.process( async (job, done) => { // don't forget to remove the done callback!
-//     executeCommand(job.data.command, done);
-// });
-
-
-app.post('/execute', async (req, res) => { 
-   // commandRes = res;
+app.post('/execute', (req, res) => { 
     // let token = req.header.token;
     // if(token){
     //     jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
     //         if (err) {
     //             //Echarlo fuera
     //         }else{
-     //   const validate = async () => {
-     //       await queue.add({ command : req.body.command});
-     //   } 
-
-     //   void validate();
-                 executeCommand(req.body.command, res);
+                executeCommand(req.body.command, res);
     //         }
 
     //     })
@@ -47,8 +21,6 @@ app.post('/execute', async (req, res) => {
     // }
     
 })
-
-
 
 
 app.get('/script', (req, res) => { 
@@ -67,20 +39,10 @@ app.get('/script', (req, res) => {
     });
 });
 
-app.get('/image', (req, res) => { 
-    //ejecutar comando para sacar la imagen
-    imageToBase64("sol.jpg") // Path to the image
-    .then(
-        (response) => {
-            res.send(response); 
-        }
-    )
-    .catch(
-        (error) => {
-            res.send(error); 
-        }
-    )
-});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
 
 
 function executeCommand(command, res){
@@ -107,4 +69,17 @@ function centerCamera(stdout, res){
     res.send(stdout);
 }
 
-
+app.get('/image', (req, res) => { 
+    //ejecutar comando para sacar la imagen
+    imageToBase64("sol.jpg") // Path to the image
+    .then(
+        (response) => {
+            res.send(response); 
+        }
+    )
+    .catch(
+        (error) => {
+            res.send(error); 
+        }
+    )
+});
